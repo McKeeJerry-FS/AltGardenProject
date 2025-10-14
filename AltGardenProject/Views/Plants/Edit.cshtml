@@ -1,0 +1,74 @@
+﻿@model AltGardenProject.Models.Plant
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Plant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PlantId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Species" class="control-label"></label>
+                <input asp-for="Species" class="form-control" />
+                <span asp-validation-for="Species" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DatePlanted" class="control-label"></label>
+                <input asp-for="DatePlanted" class="form-control" />
+                <span asp-validation-for="DatePlanted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GardenId" class="control-label"></label>
+                <select asp-for="GardenId" class="form-control" asp-items="ViewBag.GardenId"></select>
+                <span asp-validation-for="GardenId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Required_PH" class="control-label"></label>
+                <input asp-for="Required_PH" class="form-control" />
+                <span asp-validation-for="Required_PH" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Required_Temperature" class="control-label"></label>
+                <input asp-for="Required_Temperature" class="form-control" />
+                <span asp-validation-for="Required_Temperature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Required_Humidity" class="control-label"></label>
+                <input asp-for="Required_Humidity" class="form-control" />
+                <span asp-validation-for="Required_Humidity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Required_LightingStrength" class="control-label"></label>
+                <input asp-for="Required_LightingStrength" class="form-control" />
+                <span asp-validation-for="Required_LightingStrength" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Harvested" class="control-label"></label>
+                <input asp-for="Harvested" class="form-control" />
+                <span asp-validation-for="Harvested" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,72 @@
+﻿@model AltGardenProject.Models.Plant
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Plant</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Species)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Species)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DatePlanted)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DatePlanted)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Garden)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Garden.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Required_PH)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Required_PH)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Required_Temperature)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Required_Temperature)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Required_Humidity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Required_Humidity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Required_LightingStrength)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Required_LightingStrength)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Harvested)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Harvested)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.PlantId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

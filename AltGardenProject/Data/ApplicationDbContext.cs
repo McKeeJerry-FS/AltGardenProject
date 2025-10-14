@@ -10,5 +10,7 @@ namespace AltGardenProject.Data
             : base(options)
         {
         }
-    }
+        public DbSet<Garden> Gardens { get; set; }
+        public DbSet<Plant> Plants { get; set; }
+        }
 }

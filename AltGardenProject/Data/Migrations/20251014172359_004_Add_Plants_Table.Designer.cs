@@ -4,6 +4,7 @@ using AltGardenProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AltGardenProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251014172359_004_Add_Plants_Table")]
+    partial class _004_Add_Plants_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,6 +98,108 @@ namespace AltGardenProject.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("AltGardenProject.Models.Garden", b =>
+                {
+                    b.Property<int>("GardenId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GardenId"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Humidity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastFertilized")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastWatered")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LightingStrength")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Location")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PH")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Temperature")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("VPD")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("GardenId");
+
+                    b.ToTable("Gardens");
+                });
+
+            modelBuilder.Entity("AltGardenProject.Models.Plant", b =>
+                {
+                    b.Property<int>("PlantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlantId"));
+
+                    b.Property<DateTime>("DatePlanted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GardenId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Harvested")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Required_Humidity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Required_LightingStrength")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Required_PH")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Required_Temperature")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Species")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PlantId");
+
+                    b.HasIndex("GardenId");
+
+                    b.ToTable("Plants");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -234,6 +339,17 @@ namespace AltGardenProject.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AltGardenProject.Models.Plant", b =>
+                {
+                    b.HasOne("AltGardenProject.Models.Garden", "Garden")
+                        .WithMany("Plants")
+                        .HasForeignKey("GardenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Garden");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -283,6 +399,11 @@ namespace AltGardenProject.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AltGardenProject.Models.Garden", b =>
+                {
+                    b.Navigation("Plants");
                 });
 #pragma warning restore 612, 618
         }
