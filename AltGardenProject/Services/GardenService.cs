@@ -1,10 +1,20 @@
-﻿using AltGardenProject.Models;
+﻿using AltGardenProject.Data;
+using AltGardenProject.Models;
 using AltGardenProject.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace AltGardenProject.Services
 {
     public class GardenService : IGardenService
     {
+        private readonly ApplicationDbContext _context;
+
+        public GardenService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public Task<Garden> CreatePlantAsync(Garden garden)
         {
             throw new NotImplementedException();
@@ -15,9 +25,10 @@ namespace AltGardenProject.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Garden>> GetAllGardensAsync()
+        public async Task<List<Garden>> GetAllGardensAsync()
         {
-            throw new NotImplementedException();
+            var gardens = await _context.Gardens.ToListAsync();
+            return gardens;
         }
 
         public Task<Garden?> GetGardenByIdAsync(int gardenId)

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AltGardenProject.Data;
 using AltGardenProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using AltGardenProject.Services.Interfaces;
 
 namespace AltGardenProject.Controllers
 {
@@ -17,16 +18,18 @@ namespace AltGardenProject.Controllers
     public class GardensController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IGardenService _gardenService;
 
-        public GardensController(ApplicationDbContext context)
+        public GardensController(ApplicationDbContext context, IGardenService gardenService)
         {
             _context = context;
+            _gardenService = gardenService;
         }
 
         // GET: Gardens
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Gardens.ToListAsync());
+            return View(await _gardenService.GetAllGardensAsync());
         }
 
         // GET: Gardens/Details/5
