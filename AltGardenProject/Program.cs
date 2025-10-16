@@ -19,6 +19,7 @@ builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireCo
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IPlantService, PlantService>();
+builder.Services.AddScoped<IGardenService, GardenService>();
 
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
