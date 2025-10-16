@@ -1,5 +1,7 @@
 using AltGardenProject.Data;
 using AltGardenProject.Models;
+using AltGardenProject.Services;
+using AltGardenProject.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IPlantService, PlantService>();
 
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();

@@ -7,23 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AltGardenProject.Data;
 using AltGardenProject.Models;
+using AltGardenProject.Services.Interfaces;
 
 namespace AltGardenProject.Controllers
 {
     public class PlantsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IPlantService _plantService;
 
-        public PlantsController(ApplicationDbContext context)
+        public PlantsController(ApplicationDbContext context, IPlantService plantService)
         {
             _context = context;
+            _plantService = plantService;
         }
 
         // GET: Plants
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Plants.Include(p => p.Garden);
-            return View(await applicationDbContext.ToListAsync());
+            var plants = await _plantService.GetAllPlantsAsync();
+            return View(plants);
         }
 
         // GET: Plants/Details/5
